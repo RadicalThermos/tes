@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
 		user.setLoginName(loginName);
 		user.setPassword(loginPassword);
 		String userID = userMapper.login(user);
-		if(user!=null){
+		if(userID!=null){
 			rs.setStatus(1);
 			rs.setMessage("登录成功");
 		}else {
