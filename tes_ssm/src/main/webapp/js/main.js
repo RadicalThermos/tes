@@ -13,8 +13,28 @@ $(function(){
 	draw_user();
 	// 画视频统计环行图
 	draw_video();
+	//获取内存中header 中id为logout_a的对象
+	$("#logout_a").click(function () {
+		logout();
+	});
 });
 
+function logout() {
+	$.ajax({
+		url:basePath+"main/logout",
+		type:"post",
+		dataType:"json",
+		success:function(result){
+			if(result.status==1){
+				alert("登出成功");
+				window.location.href="login.html";
+			}
+		},
+		error:function(){
+			alert("请求失败!");
+		}
+	});
+}
 // 关闭面板
 function close_panel(btn) {
 	$(btn).parent().parent().parent().fadeOut(200);
