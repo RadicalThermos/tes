@@ -113,7 +113,7 @@ public class Page {
 	}
 
 	public String getRoleType() {
-		return "%"+roleType+"%";
+		return roleType;
 	}
 
 	public void setRoleType(String roleType) {

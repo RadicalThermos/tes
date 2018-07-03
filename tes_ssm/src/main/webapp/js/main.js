@@ -1,5 +1,5 @@
 //@ sourceURL=main.js
-
+//动态加载加上上一行能在浏览器显示
 $(function(){
 	// 注册面板关闭事件
 	$(".panel .close").click(function(){

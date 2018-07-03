@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.tarena.entity.Role;
 import com.tarena.service.RoleService;
 import com.tarena.vo.Page;
 import com.tarena.vo.Result;
@@ -20,7 +21,7 @@ public class RoleController {
 	private RoleService roleService;
 	@RequestMapping(value="findRolesByPage",method = RequestMethod.GET)
 	@ResponseBody
-	public Result findRoleByPage(Page page){
+	public Result findRolesByPage(Page page){
 		Result result = null;
 		result = this.roleService.findRolesByPage(page);
 		return result;
@@ -32,4 +33,48 @@ public class RoleController {
 		result = this.roleService.addRole(roleName);
 		return result;
 	}
+	@RequestMapping(value="updateRole",method = RequestMethod.POST)
+	@ResponseBody
+	public Result updateRole(Role role){
+		Result result = null;
+		result = this.roleService.updateRole(role);
+		return result;
+	}
+	@RequestMapping(value="deleteRole/{roleID}",method = RequestMethod.DELETE)
+	@ResponseBody
+	public Result deleteRole(@PathVariable("roleID")String roleID){
+		System.out.println(roleID);
+		Result result = null;
+		result = this.roleService.deleteRole(roleID);
+		return result;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

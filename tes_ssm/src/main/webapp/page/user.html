@@ -1,7 +1,7 @@
 ﻿<div role="tabpanel">
-  <!-- 导入 -->
+  <!-- 导出 -->
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span class="glyphicon glyphicon-import" aria-hidden="true">导入</span>
+    <span class="glyphicon glyphicon-export" aria-hidden="true">导出</span>
   </button>
   <!-- 页签导航 -->
   <ul class="nav nav-tabs " role="tablist">
@@ -23,20 +23,22 @@
       <div class="panel panel-default">
         <div class="panel-body">
           <form class="form-inline">
-            <div class="btn-group" role="group" aria-label="角色">
-              <button type="button" class="btn btn-default">讲师</button>
-              <button type="button" class="btn btn-default active">学员</button>
-              <button type="button" class="btn btn-default">管理员</button>
+            <div id="role_type" class="btn-group" role="group" aria-label="角色">
+              <button id="role_type1" type="button" class="btn btn-default">讲师</button>
+              <button id="role_type2" type="button" class="btn btn-default">学员</button>
+              <button id="role_type3" type="button" class="btn btn-default">管理员</button>
+              <button id="role_type4" type="button" class="btn btn-default">全部</button>
+              
             </div>
             &nbsp;&nbsp;
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search for...">
+              <input id="user_search" type="text" class="form-control" placeholder="Search for...">
               <span class="input-group-btn">
                 <button class="btn btn-primary" type="button">搜索</button>
               </span>
             </div><!-- input-group -->
           </form>
-          <table class="table table-striped">
+          <table id="user_table" class="table table-striped">
             <thead>
               <tr>
                 <th class="col-md-1">#</th>
@@ -50,7 +52,7 @@
                 <th class="col-md-2">操作</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id = "user_tbody">
               <tr>
                 <td>1</td>
                 <td>caocao</td>
@@ -128,7 +130,7 @@
       <!-- end -->
       <!-- 分页导航 -->
       <nav class="col-md-4 col-md-offset-4">
-        <ul class="pagination">
+        <ul id="user_page" class="pagination">
           <li>
             <a href="#" aria-label="Previous">
               <span aria-hidden="true">&laquo;</span>

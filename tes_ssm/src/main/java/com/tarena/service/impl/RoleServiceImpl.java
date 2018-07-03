@@ -75,6 +75,25 @@ public class RoleServiceImpl implements RoleService {
 		result.setData(role);
 		return result;
 	}
+
+	@Override
+	public Result updateRole(Role role) {
+		Result result= new Result();
+	 	this.roleMapper.updateRole(role);
+		result.setStatus(1);
+		result.setMessage("更新成功");
+	 	return result;
+	}
+
+	@Override
+	public Result deleteRole(String roleID) {
+		Result result = new Result();
+	    this.roleMapper.deleteRole(roleID);
+	    result.setStatus(1);
+	    result.setMessage("删除成功!");
+	    System.out.println(result);
+		return result;
+	}
 }
 
 
