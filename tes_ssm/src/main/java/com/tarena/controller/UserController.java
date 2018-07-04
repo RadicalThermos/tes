@@ -52,8 +52,8 @@ public class UserController {
 	@RequestMapping(value="newUser",method = RequestMethod.POST)
 	public void addUser(User user,String roleID,MultipartFile addHeadPicture,
 			HttpServletRequest request,HttpServletResponse response){
-		System.out.println("add--->"+addHeadPicture);
-		//this.userService.addUser(user,roleID,addHeadPicture,request,response);
+		//System.out.println("add--->"+addHeadPicture);
+		this.userService.addUser(user,roleID,addHeadPicture,request,response);
 	}
 }
 
