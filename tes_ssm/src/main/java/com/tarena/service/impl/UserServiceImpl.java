@@ -3,8 +3,11 @@ package com.tarena.service.impl;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.tarena.dao.UserMapper;
 import com.tarena.entity.User;
@@ -68,6 +71,28 @@ public class UserServiceImpl implements UserService {
 		result.setStatus(1);
 		result.setData(page);
 		return result;
+	}
+
+	@Override
+	public void addUser(User user, String roleID, MultipartFile addHeadPicture, HttpServletRequest request,
+			HttpServletResponse response) {
+		//判断文件是否存在,不存在要提示客户端
+		
+		//获取文件所有的信息
+		
+		//文件类型是否允许
+		
+		//文件大小是否允许
+		
+		//开始上传
+		
+		//构建User对象
+		
+		//添加user对象进数据库
+		
+		//添加用户和角色的关联表
+		
+		//提示用户添加成功
 	}
 }
 

@@ -48,6 +48,15 @@ public class RoleController {
 		result = this.roleService.deleteRole(roleID);
 		return result;
 	}
+	@RequestMapping(value="findAllRoles",method = RequestMethod.GET)
+	@ResponseBody
+	public Result findAllRoles(){
+		System.out.println("findAllRoles");
+		Result result = null;
+		//result.setStatus(1);
+		result = this.roleService.findAllRoles();
+		return result;
+	}
 }
 
 

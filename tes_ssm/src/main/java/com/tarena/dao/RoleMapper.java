@@ -27,4 +27,6 @@ public interface RoleMapper {
 
 	public int deleteRole(String roleID);
 
+	public List<Role> findAllRoles();
+
 }

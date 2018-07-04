@@ -12,7 +12,93 @@ $(function(){
 		//alert(roleType);
 		findUsers(1);
 	});
+	$("#user_add").click(function (e) {
+		//alert("aaaaaa");
+		e.preventDefault();
+		findAllRoles();
+	});
+	$("#addUserPanel form").submit(function () {
+		return addUser();
+	});
 });
+//添加用户
+function addUser() {
+	//获取要添加的新数据
+	var loginName = $("#inputEmail").val();
+	var password = $("#inputPassword").val();
+	var password2 = $("#inputPassword2").val();
+	var nickName = $("#nickName").val();
+	var age = $("#age").val();
+	var roleID = $("#roleCategory").val();
+	var sex = $("#addUserPanel form input[name=user-type]").val();
+	//alert(loginName+" "+password+" "+password2+" "+nickName+" "+age+" "+" "+roleID+" "+sex);
+	if(password!=password2){
+		return false;
+	}
+	if(age<=0){
+		return false;
+	}
+	//异步请求
+	$.ajaxFileUpload({
+		url:basePath+"user/newUser",
+		secureuri:false,
+		fileElementId:"addHeadPicture",//文件域的ID
+		type:"post",
+		data:{
+			"loginName":loginName,
+			"password":password,
+			"nickName":nickName,
+			"age":age,
+			"sex":sex,
+			"roleID":roleID
+			},
+		dataType:"text",
+		success:function(data,status){
+			//alert(data);
+			data=data.replace(/<PRE.*?>/g,'');
+			data=data.replace("<PRE>",'');
+			data=data.replace("</PRE>",'');
+			data=data.replace(/<pre.*?>/g,'');
+			data=data.replace("<pre>",'');
+			data=data.replace("</pre>",'');
+			alert(data);
+		},
+		error:function(){
+			alert("请求失败!");
+		}
+	});
+	return false;
+}
+function findAllRoles() {
+	$.ajax({
+		url:basePath+"role/findAllRoles",
+		type:"get",
+		dataType:"json",
+		success:function(result){
+			if(result.status==1){
+				//alert(result.status+"  "+result.message);
+				if(result.status==1){
+					$("#roleCategory").html("");
+					$("#roleCategory").append('<option></option>');
+					var roles = result.data;
+					$(roles).each(function (n,role) {
+						//alert(role.name);
+						//alert(role.id);
+						var roleOption='<option value = "'+role.id+'">'+role.name+'</option>';
+						$("#roleCategory").append(roleOption);
+					});
+				}else if(result.status){
+					alert(result.message);
+				}
+			}
+		},
+		error:function(){
+			alert("请求失败!");
+		}
+		
+	});
+}
+
 function findUsers(currentPage) {
 	//alert("findUsers");
 	//处理模糊关键字
@@ -45,7 +131,7 @@ function findUsers(currentPage) {
 			 		if(rolename==''){
 			 			rolename = '无角色';
 			 		}else{
-			 			rolename.substring(0,rolename.length-1);
+			 			rolename = rolename.substring(0,rolename.length-1);
 			 		}
 			 		
 					var tr = '<tr>'+

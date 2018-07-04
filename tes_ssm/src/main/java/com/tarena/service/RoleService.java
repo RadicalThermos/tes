@@ -33,5 +33,11 @@ public interface RoleService {
 	 * @return
 	 */
 	public Result deleteRole(String roleID);
+
+	/**
+	 * 查询所有的角色,给新增用户的页面添加所有角色信息
+	 * @return
+	 */
+	public Result findAllRoles();
 	
 }

@@ -94,6 +94,21 @@ public class RoleServiceImpl implements RoleService {
 	    System.out.println(result);
 		return result;
 	}
+
+	@Override
+	public Result findAllRoles() {
+		Result result = new Result();
+	    List<Role> allRoles = this.roleMapper.findAllRoles();
+	    if(allRoles!=null){
+	    	result.setStatus(1);
+	    	result.setData(allRoles);
+	    }else{
+	    	result.setStatus(0);
+	    	result.setMessage("没有数据");
+	    }
+	    System.out.println(allRoles);
+		return result;
+	}
 }
 
 
