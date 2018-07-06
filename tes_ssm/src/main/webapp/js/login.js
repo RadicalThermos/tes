@@ -8,12 +8,12 @@ $(function () {
 	});
 });
 function login() {
-	alert("login()");
+	//alert("login()");
 	//获取页面数据
 	var loginName= $("#inputName").val();
 	var password = $("#inputPassword").val();
 	var remember = $(".container form input[type=checkbox]").get(0).checked;
-	alert(loginName+"  "+password + "  " +remember);
+	//alert(loginName+"  "+password + "  " +remember);
 	//根据页面数据异步请求
 	$.ajax({
 		url:basePath+"user/login/"+loginName+"/"+password,

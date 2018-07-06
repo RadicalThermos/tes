@@ -15,7 +15,10 @@
 	<!-- 全局spring配置文件，用于初始化spring容器 多个配置文件用分号间隔-->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:conf/spring_context.xml;classpath:conf/spring_mybatis.xml</param-value>
+		<param-value>classpath:conf/spring_context.xml;
+		             classpath:conf/spring_mybatis.xml;
+					 classpath:conf/spring_shiro.xml
+		</param-value>
 	</context-param>
 	<!-- 监听器，用户读取加载全局spring配置文件 -->
 	<listener>
@@ -37,6 +40,20 @@
 	<filter-mapping>
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<!-- shiro的过滤器  注意此处的filtername跟spring配置文件中的bean id名称一致  -->
+	<filter>
+	  	<filter-name>shiroFilter</filter-name>
+	  	<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	  		<init-param>
+	  			<!-- 将shiro的声明周期交给web容器管理 -->	  		
+		  		<param-name>targetFilterLifecycle</param-name>
+		  		<param-value>true</param-value>
+	  		</init-param>
+	</filter>
+	<filter-mapping>
+	  	<filter-name>shiroFilter</filter-name>
+	  	<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	<!-- spring mvc的入口 加载spring mvc 前端控制器 restful -->
 	<!-- restful模式,必须注意在spring_mvc.xml中配置,刨除静态资源 -->

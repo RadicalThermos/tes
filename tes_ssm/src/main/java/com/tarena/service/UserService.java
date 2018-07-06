@@ -30,6 +30,16 @@ public interface UserService {
 	 */
 	public void addUser(User user, String roleID, MultipartFile addHeadPicture, HttpServletRequest request,
 			HttpServletResponse response);
-	
-	
+	/**
+	 * 导出excel的业务方法
+	 */
+	public byte[] export_User();
+
+	/**
+	 * shiro 的登录方法
+	 * @param loginName
+	 * @param loginPassword
+	 * @return
+	 */
+	public Result login_shiro(String loginName, String loginPassword);
 }

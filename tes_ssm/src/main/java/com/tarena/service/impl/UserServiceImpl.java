@@ -8,6 +8,10 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +22,7 @@ import com.tarena.entity.User;
 import com.tarena.entity.UserRole;
 import com.tarena.service.UserService;
 import com.tarena.util.CommonValue;
+import com.tarena.util.ExcelUtil;
 import com.tarena.util.PageUtil;
 import com.tarena.util.PrintWriterUtil;
 import com.tarena.util.UUIDUtil;
@@ -165,4 +170,73 @@ public class UserServiceImpl implements UserService {
 			throw new RuntimeException(e);
 		}
 	}
+
+	@Override
+	public byte[] export_User() {
+		byte[]data=null;
+		//获取数据
+		List<User> users = this.userMapper.findAllUsers();
+		//用自定义工具把users转换成字节数组,以备下载
+		if(users!=null&&users.size()>0){
+			data = ExcelUtil.write2Excel(users);
+			//把字节数组下载到客户端
+		}
+		return data;
+	}
+
+	@Override
+	public Result login_shiro(String loginName, String loginPassword) {
+		//loginName loginPassword是用户数据,准备把这两个数据交给安全管理中心
+		//把这两个数据封装给shiro中的某个对象中
+		Result result=new Result();
+		//Shiro的登陆操作   获取用户对象
+		Subject subject = SecurityUtils.getSubject();
+		
+		//将用户的数据封装为令牌(票)
+		UsernamePasswordToken token = new UsernamePasswordToken(loginName,loginPassword);
+		
+		try {
+			//通过用户实现登陆 
+			subject.login(token); 
+			
+			//获取真实的用户对象
+			User u = (User) subject.getPrincipal();
+			
+			//session.setAttribute("sessionUser", user);
+			subject.getSession().setAttribute("sessionUser", u);
+			//证明用户名和密码正确
+			result.setStatus(1);
+			result.setMessage("登录成功!");
+			
+		} catch (AuthenticationException e) {
+			e.printStackTrace();  //打印异常信息
+			//证明用户名和密码错误
+			result.setStatus(0);
+			result.setMessage("登录失败!");
+		}
+		return result;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

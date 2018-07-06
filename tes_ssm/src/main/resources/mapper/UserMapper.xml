@@ -37,6 +37,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from t_user
 		where user_loginname = #{loginName} and user_password =#{password}
 	</select>
+	
+	<select id="findUserByUserName" parameterType="string" resultMap="userMap">
+		select 
+			user_id,
+			user_loginname,
+			user_password
+		from t_user
+		where user_loginname=#{_parameter}
+	</select>
 	<!-- 用户的分页查询(代角色类型) -->
 	<select id="getCount" parameterType="Page" resultType="integer">
 		select count(user_id)
@@ -103,6 +112,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into t_user_role(uid,rid)
 		values(#{userId},#{roleId})
 	</insert>
+	
+	<select id="findAllUsers" resultMap="userMap">
+		select 
+			user_id,
+			user_loginname,
+			user_logintype,
+			user_nickname,
+			user_password,
+			user_type,
+			user_head,
+			user_score,
+			user_islock,
+			user_pwdstate,
+			user_regdate,
+			user_age,
+			user_sex
+		from t_user
+	</select>
 </mapper>
 
 

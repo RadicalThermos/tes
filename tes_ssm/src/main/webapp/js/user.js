@@ -20,7 +20,11 @@ $(function(){
 	$("#addUserPanel form").submit(function () {
 		return addUser();
 	});
+	$("#export_user_excel").click(function () {
+		window.location.href=basePath+"user/exportUserExcel";
+	});
 });
+
 //添加用户
 function addUser() {
 	//获取要添加的新数据

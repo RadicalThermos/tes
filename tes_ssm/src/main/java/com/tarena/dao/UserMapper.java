@@ -20,4 +20,9 @@ public interface UserMapper {
 	//添加用户角色中间表t_user_role
 	public void addUserRole(UserRole userRole);
 
+	//查询所有用户数据,用于导出excel文件用
+	public List<User> findAllUsers();
+
+	//根据用户名查找用户信息(shiro登录用)
+	public User findUserByUserName(String username);
 }
